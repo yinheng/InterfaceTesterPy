@@ -1,7 +1,7 @@
 import unittest
-from com.yinheng.test import test_config_reader
+import test_config_reader
 
-test_config_xml_path = '''E:/Workspace-Wendy/InterfaceTestPy/resource/test_config.xml'''
+test_config_xml_path = '''F:/cygwin/home/test_config.xml'''
 
 class InterfaceTest(unittest.TestCase):
 
@@ -12,5 +12,3 @@ class InterfaceTest(unittest.TestCase):
     def testInterface(self):
         assert 1 > 0
         pass
-
-unittest.main()

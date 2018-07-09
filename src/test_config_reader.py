@@ -2,7 +2,7 @@ from xml.dom.minidom import parse
 import xml.dom.minidom
 
 
-class TestConfigReader():
+class TestConfigReader:
     tag_param = "parameter"
     attr_name = "name"
     attr_value = "value"
