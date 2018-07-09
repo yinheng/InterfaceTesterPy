@@ -1,7 +1,9 @@
 from enum import Enum
 import xlrd
 
-
+test_case_dict = {0: "__id__ ", 1: "__testName__", 2: "__level__", 3: "__requestType__",
+                  4: "__HTTPHeader__", 5: "__target__", 6: "__expectedData__", 7: "__param__",
+                  8: "__output__", 9: "__response__", 10: "__result__"}
 class Level(Enum):
     High = 0,
     Middle = 1,
@@ -40,6 +42,10 @@ class TestCase:
     __response__ = ""
     __responseList__ = []
     __result__ = Result.FAILURE
+
+    def __init__(self):
+        for i in test_case_dict.keys():
+             self.__setattr__(test_case_dict.get(i), None)
 
 
 class TestCaseBuilder:
@@ -136,26 +142,25 @@ class TestCaseBuilder:
 def read_excel(path):
 
     case_list = []
-    test_case_dict = {0: "__id__ ", 1: "__testName__", 2: "__level__", 3: " __requestType__",
-                    4: "__HTTPHeader__", 5: "__target__", 6: "__expectedData__", 7: "__param__",
-                    8: "__output__", 9: "__response__", 10: "__result__"}
-
     workbook = xlrd.open_workbook(path)
     sheets = workbook.sheet_names()
     worksheet = workbook.sheet_by_name(sheets[0])
     print("rows:", worksheet.nrows, "col: ", worksheet.ncols)
     for i in range(1, worksheet.nrows):
-        case = TestCase()
+        case= TestCase()
         for j in range(0, worksheet.ncols):
             col_name = test_case_dict[j]
             print("col_name: ", col_name)
-            case.col_name = worksheet.cell_value(i, j)
-            print("row: ", i, "col： ", j, case.col_name)
+            case.__index__ = i
+            case.__setattr__("%s" % col_name, worksheet.cell_value(i, j))
+            print("row: ", i, "col: ", j, "value: ", case.__getattribute__(col_name))
         case_list.append(case)
         print(len(case_list))
     return case_list
 
 
-# read_excel('''F:/cygwin/home/Template1.xls''')
+# case_list1 = read_excel('''F:/cygwin/home/Template1.xls''')
+# for case1 in case_list1:
+    # print("case1: ", case1.__requestType__, case1.__index__)
 
 
