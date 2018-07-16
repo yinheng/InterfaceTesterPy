@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <parameter name="path" value="./Template.xls"/>
+    <parameter name="debug" value="true"/>
+    <parameter name="reportPath" value="report"/>
+</config>
